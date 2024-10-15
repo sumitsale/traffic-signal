@@ -20,6 +20,10 @@
             text-align: center;
         }
 
+        h2, h3 {
+            text-align: center;
+        }
+
         ul {
             text-align: center;
             list-style-type: disc;
@@ -31,10 +35,24 @@
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-bottom: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
         }
 
         .traffic-light {
@@ -68,9 +86,18 @@
         .light.green {
             background-color: green;
         }
+
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- School Logo -->
+    <img src="https://files.myglamm.com/site-images/original/images-meridian.jpeg" alt="Meridian School Logo">
 
     <h1>Traffic Signal Simulator</h1>
     
@@ -79,6 +106,8 @@
         <li>Vaishant Sale (Roll No. 37)</li>
         <li>Rudra Warangase (Roll No. 32)</li>
     </ul>
+
+    <h3>Meridian School, Titwala</h3>
 
     <button id="startBtn">Start Simulation</button>
 
