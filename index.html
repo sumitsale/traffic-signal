@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Signal Simulator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .traffic-light {
+            width: 100px;
+            height: 300px;
+            background-color: black;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .light {
+            width: 80px;
+            height: 80px;
+            background-color: gray;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .light.red {
+            background-color: red;
+        }
+
+        .light.yellow {
+            background-color: yellow;
+        }
+
+        .light.green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="traffic-light">
+        <div id="red" class="light"></div>
+        <div id="yellow" class="light"></div>
+        <div id="green" class="light"></div>
+    </div>
+
+    <script>
+        const redLight = document.getElementById('red');
+        const yellowLight = document.getElementById('yellow');
+        const greenLight = document.getElementById('green');
+
+        // Function to speak a message using the browser's Text-to-Speech API
+        function speak(message) {
+            const speech = new SpeechSynthesisUtterance(message);
+            window.speechSynthesis.speak(speech);
+        }
+
+        function resetLights() {
+            redLight.classList.remove('red');
+            yellowLight.classList.remove('yellow');
+            greenLight.classList.remove('green');
+        }
+
+        function cycleLights() {
+            resetLights();
+            redLight.classList.add('red');
+            speak("Red means stop");
+            setTimeout(() => {
+                resetLights();
+                yellowLight.classList.add('yellow');
+                speak("Yellow means get ready");
+            }, 3000); // Red light for 3 seconds
+
+            setTimeout(() => {
+                resetLights();
+                greenLight.classList.add('green');
+                speak("Green means go");
+            }, 6000); // Yellow light for 3 seconds, then green
+
+            setTimeout(() => {
+                resetLights();
+                cycleLights();
+            }, 9000); // Green light for 3 seconds, then restart cycle
+        }
+
+        // Start the simulation with an intro message
+        window.onload = function() {
+            speak("Demo of Traffic Light Simulation");
+            setTimeout(() => {
+                // Add a pause after the intro before starting the traffic light cycle
+                setTimeout(() => {
+                    cycleLights(); // Start the traffic light cycle after the pause
+                }, 2000); // 2 seconds pause after the initial message
+            }, 3000); // Wait for 3 seconds to complete the initial speech
+        };
+    </script>
+
+</body>
+</html>
