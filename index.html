@@ -30,6 +30,13 @@
             margin-bottom: 5px;
         }
 
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
         .traffic-light {
             width: 100px;
             height: 300px;
@@ -73,13 +80,17 @@
         <li>Rudra Warangase (Roll No. 32)</li>
     </ul>
 
-    <div class="traffic-light">
+    <button id="startBtn">Start Simulation</button>
+
+    <div class="traffic-light" id="trafficLight" style="display:none;">
         <div id="red" class="light"></div>
         <div id="yellow" class="light"></div>
         <div id="green" class="light"></div>
     </div>
 
     <script>
+        const startButton = document.getElementById('startBtn');
+        const trafficLight = document.getElementById('trafficLight');
         const redLight = document.getElementById('red');
         const yellowLight = document.getElementById('yellow');
         const greenLight = document.getElementById('green');
@@ -122,8 +133,9 @@
             }, 9000); // Green light for 3 seconds, then restart cycle
         }
 
-        // Start the simulation automatically on page load
-        window.onload = function() {
+        // Start the simulation when the button is clicked
+        startButton.onclick = function() {
+            trafficLight.style.display = 'flex'; // Show the traffic light
             speak("Demo of Traffic Light Simulation");
             setTimeout(() => {
                 cycleLights(); // Start the traffic light cycle after the intro
