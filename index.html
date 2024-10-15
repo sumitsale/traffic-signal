@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic Signal Simulator</title>
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        ul {
+            text-align: center;
+            list-style-type: disc;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
         }
 
         .traffic-light {
@@ -23,6 +39,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin-top: 20px;
         }
 
         .light {
@@ -48,6 +65,14 @@
 </head>
 <body>
 
+    <h1>Traffic Signal Simulator</h1>
+    
+    <h2>Team Members:</h2>
+    <ul>
+        <li>Vaishant Sale (Roll No. 37)</li>
+        <li>Rudra Warangase (Roll No. 32)</li>
+    </ul>
+
     <div class="traffic-light">
         <div id="red" class="light"></div>
         <div id="yellow" class="light"></div>
@@ -61,8 +86,12 @@
 
         // Function to speak a message using the browser's Text-to-Speech API
         function speak(message) {
-            const speech = new SpeechSynthesisUtterance(message);
-            window.speechSynthesis.speak(speech);
+            if ('speechSynthesis' in window) {
+                const speech = new SpeechSynthesisUtterance(message);
+                window.speechSynthesis.speak(speech);
+            } else {
+                console.warn("Speech synthesis not supported on this browser.");
+            }
         }
 
         function resetLights() {
@@ -93,15 +122,12 @@
             }, 9000); // Green light for 3 seconds, then restart cycle
         }
 
-        // Start the simulation with an intro message
+        // Start the simulation automatically on page load
         window.onload = function() {
             speak("Demo of Traffic Light Simulation");
             setTimeout(() => {
-                // Add a pause after the intro before starting the traffic light cycle
-                setTimeout(() => {
-                    cycleLights(); // Start the traffic light cycle after the pause
-                }, 2000); // 2 seconds pause after the initial message
-            }, 3000); // Wait for 3 seconds to complete the initial speech
+                cycleLights(); // Start the traffic light cycle after the intro
+            }, 5000); // Wait for 5 seconds to complete the initial speech and add a pause
         };
     </script>
 
